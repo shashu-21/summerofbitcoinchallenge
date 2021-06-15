@@ -1,16 +1,16 @@
 #include <bits/stdc++.h>
 #include <fstream>
-#include<string>
+#include <string>
 #include <iostream>
 #include <limits.h>
 # define MAX_WT static_cast<long long>(4000000)
 using namespace std;
-vector<string> tokenizer(string s, string del);
+
 class Transactions{
     public:
         string tx_id;
         int fee, weight;
-        unordered_set<string> parent;
+        set<string> parent;
     public:
         Transactions(string tx_id, string fee, string weight, string parents): tx_id(tx_id) , fee(stoi(fee)), weight(stoi(weight))
         {
@@ -31,18 +31,20 @@ class Transactions{
 
 class UpTrans{
     public:
-        string tx_id;
+        
         int feeTot, weightTot;
-        unordered_set<string> ancestors;
+        set<int> ancestors;
     public:
-        UpTrans(string tx_id, int feeTot, int weightTot): tx_id(tx_id) , feeTot(feeTot), weightTot(weightTot)
+        UpTrans(int feeTot, int weightTot):feeTot(feeTot), weightTot(weightTot)
         {}
-        UpTrans(string tx_id, int feeTot, int weightTot, unordered_set<string> ancestors): tx_id(tx_id) , feeTot(feeTot), weightTot(weightTot), ancestors(ancestors)
+        UpTrans( int feeTot, int weightTot, set<int> ancestors): feeTot(feeTot), weightTot(weightTot), ancestors(ancestors)
         {}
         
 
 };
-vector<string> tokenizer(string s, string del)
+vector<string> tokenizer(const string &s, string del);
+
+vector<string> tokenizer(const string &s, string del)
 {
     vector <string> res;
     int start = 0;
@@ -55,21 +57,20 @@ vector<string> tokenizer(string s, string del)
     res.push_back(s.substr(start, end - start));
     return res;
 }
-unordered_set<string> ancestors;
-pair<int, int> calcTot(unordered_set<string> &parent, vector <Transactions> &ob)
+set<int> ancestors;
+pair<int, int> calcTot(const set<string> &parent,const vector <Transactions> &ob)
 {
     int fee=0, weight=0;
-    for(auto p:parent)
+    for(const auto &p:parent)
     {
-        // cout<<p<<"\n";
-        // if(parent.size()==1)
-        // cout<<"went"<<endl;
-        ancestors.insert(p);
-        for(auto x: ob)
+        
+        for(int i=0;i<ob.size();i++)
         {
+            const auto &x = ob[i];
             if((x.tx_id)==p)
             {
-               // cout<<p<<" "<<x.fee<<"\n";
+           
+                ancestors.insert(i);
                 if(x.parent.empty())
                 {
                     fee+=x.fee;
@@ -115,31 +116,38 @@ int main()
         count++;
         
     } 
+    
     baseFile.close();
 
-    cout<<"vec count:"<<ob.size();
-
     vector <UpTrans> finOb;
-    for(auto x: ob)
+    for(const auto &x: ob)
     {   
         if(x.parent.size()==0)
         {
-            UpTrans temp(x.tx_id,x.fee, x.weight);
+            UpTrans temp(x.fee, x.weight);
             finOb.push_back(temp);
         }
         else
         {
            
             pair <int, int> res = calcTot(x.parent, ob);
-            UpTrans temp(x.tx_id,x.fee + res.first, x.weight + res.second, ancestors);
+            UpTrans temp(x.fee + res.first, x.weight + res.second, ancestors);
             ancestors.clear();
             finOb.push_back(temp);
         }
     }
-    cout<<"vec count:"<<finOb.size();
-    for(auto x: finOb)
-    cout<<x.tx_id<<" "<<x.feeTot<<" "<<x.weightTot<<" "<<x.ancestors.size()<<"\n";
-
+    int n = finOb.size();
     
+
+    ofstream outdata;
+    outdata.open("upmempool.csv");
+    for(int i=0;i<n;i++)
+    {
+        outdata<<finOb[i].feeTot<<","<<finOb[i].weightTot<<",";
+        for(auto x:finOb[i].ancestors)
+        outdata<<x<<";";
+        outdata<<"\n";
+    }
+    outdata.close();
     return 0;
 }
