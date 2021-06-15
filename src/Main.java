@@ -61,19 +61,22 @@ public class Main {
         int W = 1000000;
         int i = 0;
         int val = 0;
-        while(W>0 && i<n)
+        while(i<n)
         {
             var item = Resources.updatedList.get(i++);
             if(item.ancestors.size()==0)
             {
                 if(!trans.contains(item.id)) {
-                    W -= item.weightTot;
-                    val += item.feeTot;
-                    trans.add(item.id);
+                    if(W-item.weightTot >=0) {
+                        W -= item.weightTot;
+                        val += item.feeTot;
+                        trans.add(item.id);
+                    }
                 }
             }
             else
             {
+                HashSet<Integer> temp = new HashSet<>();
                 if(!trans.contains(item.id))
                 {
                     int wt = item.weightTot;
@@ -86,16 +89,21 @@ public class Main {
                             fe-=Resources.originalList.get(ancestor).fee;
                         }
                         else
-                            trans.add(ancestor);//adding all the ancestors not already present
+                            temp.add(ancestor);//adding all the ancestors not already present
                     }
-                    trans.add(item.id); // adding the element at last, such that order is maintained
-                    W -= wt;
-                    val += fe;
+                    if(W-wt>=0) {
+                        trans.addAll(temp);//adding all the ancestors not present so far.
+                        trans.add(item.id); // adding the element at last, such that order is maintained
+                        W -= wt;
+                        val += fe;
+
+                    }
                 }
             }
         }
 
         printOutput(trans);
+        System.out.println(W);
         System.out.println(trans.size());
         return val;
     }
@@ -109,8 +117,6 @@ public class Main {
 
         //calculating
         System.out.println(calcGreedy());
-
-
     }
 }
 
