@@ -16,11 +16,11 @@ The repository contains a directory 'src' within which the java source code for 
 **Idea**
 
 There were two points of interests when tackling this problem:
-* 0/1 Knapsack: This problem is a variation of 0/1 Knapsack problem, the difference here being that order of transactions must be maintained, which calls for checking for conflicts before each decision. The problem can be solved in O(2^n) time using a recursive approach, but since the number of entries here are very high we cannot use this approach. Another approach can be dynamic programmming using tabulation, with O(n^2 x W) time complexity and O(n^2 x W) space complexity in the solution that I first tried or O(nxW) time complexity using HashSets, which causes the program to crash due to insufficient memory. This is because 0/1 knapsack is NP Complete with pseudo polynomial time comlexity.
+* 0/1 Knapsack: This problem is a variation of 0/1 Knapsack problem, the difference here being that order of transactions must be maintained, which calls for checking for conflicts before each decision. The problem can be solved in O(2^n) time using a recursive approach, but since the number of entries here are very high we cannot use this approach. Another approach can be dynamic programmming using tabulation, with O(n^2 x W) time complexity and O(n^2 x W) space complexity in the solution that I first tried or O(nxW) time complexity using HashSets, which causes the program to crash due to insufficient memory. This is because 0/1 knapsack is NP Complete with pseudo polynomial time complexity and here the value of W is very high.
     
 * Greedy Approach: Since the DP approach was very costly in terms of computational time and memory, the approach I followed was to apply a greedy algorithm on the sorted list. The heuristic followed was to priortize those transactions with a higher fee/weight ratio. Using this approach the time complexity came out to be O(W) and space complexity of O(n). This Solution is not the best solution for the given set of transactions, but it is close to total fees that the transactions have.
 
-
+*Note*: All the weights of transactions are multiples of 4, so is the maximum capacity, hence this could be divided by 4 for better efficiency.
 **References**
 
 [Miner Fees](https://en.bitcoin.it/wiki/Miner_fees)
