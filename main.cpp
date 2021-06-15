@@ -48,7 +48,7 @@ class UpTrans{
 };
 vector<string> tokenizer(const string &s, string del);
 
-vector<string> tokenizer(const string &s, string del)
+vector<string> tokenizer(const string &s, string del) //function to tokenize a given a string using a delimeter
 {
     vector <string> res;
     int start = 0;
@@ -62,7 +62,8 @@ vector<string> tokenizer(const string &s, string del)
     return res;
 }
 set<int> ancestors;
-pair<int, int> calcTot(const set<string> &parent,const vector <Transactions> &ob)
+
+pair<int, int> calcTot(const set<string> &parent,const vector <Transactions> &ob) // function to find the cumulative fee and weight and also find all the ancestors.
 {
     int fee=0, weight=0;
     for(const auto &p:parent)
