@@ -1,7 +1,16 @@
+/*
+ * Author: Shashwat Sonkar
+ * Date: 15/06/2021
+ * */
+
 import java.util.HashSet;
 import java.util.Set;
 
 public class Transactions {
+    /*
+    * Class of Original Transactions, contains all the parameters to stores the information needed
+    * */
+
     String tx_id;
     int fee, weight;
     Set<String> parent = new HashSet<String>();

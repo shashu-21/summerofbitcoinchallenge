@@ -1,12 +1,21 @@
+/*
+ * Author: Shashwat Sonkar
+ * Date: 15/06/2021
+ * */
+
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Set;
 
 public class Resources {
+    /*
+    Class that stores the dynamic arrays of objects of Transactions and CumulativeTrans class
+    It allows the use of these list in the main function and also includes a sorting function.
+    * */
+
     public static ArrayList<Transactions> originalList = new ArrayList<Transactions>();
     public static ArrayList<CumulativeTrans> updatedList = new ArrayList<CumulativeTrans>();
 
-    static void sortInOrder()
+    static void sortInOrder() // function to sort the updatedList using by fee/weight as comparison
     {
         for(int i=0;i<updatedList.size();i++)
         {

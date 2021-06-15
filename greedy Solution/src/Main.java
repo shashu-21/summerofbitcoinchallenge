@@ -1,4 +1,8 @@
-import javax.security.sasl.SaslClient;
+/*
+* Author: Shashwat Sonkar
+* Date: 15/06/2021
+* */
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -6,7 +10,7 @@ import java.util.HashSet;
 import java.util.Scanner;
 
 public class Main {
-    static void inputTrans() throws FileNotFoundException {
+    static void inputTrans() throws FileNotFoundException { //function to take input from mempool.csv
         File inpFile = new File("src/mempool.csv");
         Scanner inFileReader = new Scanner(inpFile);
         inFileReader.nextLine();
@@ -23,10 +27,9 @@ public class Main {
         }
         inFileReader.close();
     }
-    static void inputCumTrans() throws FileNotFoundException {
+    static void inputCumTrans() throws FileNotFoundException { //function to take input from upmempool.csv
         File inpFile = new File("src/upmempool.csv");
         Scanner inFileReader = new Scanner(inpFile);
-        int sum = 0;
         int id = 0;
         while (inFileReader.hasNext())
         {
@@ -42,7 +45,7 @@ public class Main {
         }
         inFileReader.close();
     }
-    static void printOutput(HashSet<Integer> trans) throws FileNotFoundException {
+    static void printOutput(HashSet<Integer> trans) throws FileNotFoundException { // function to print the block in a txt file
         File outFile = new File("src/block.txt");
         PrintWriter outWriter = new PrintWriter(outFile);
         for(int item : trans)
@@ -52,7 +55,7 @@ public class Main {
         outWriter.close();
 
     }
-    static int calcGreedy() throws FileNotFoundException {
+    static int calcGreedy() throws FileNotFoundException { //function to determine the maximum fee generated and create the block
         int n = Resources.updatedList.size();
         HashSet<Integer> trans = new HashSet<>();
         int W = 1000000;
@@ -85,7 +88,7 @@ public class Main {
                         else
                             trans.add(ancestor);//adding all the ancestors not already present
                     }
-                    trans.add(item.id);
+                    trans.add(item.id); // adding the element at last, such that order is maintained
                     W -= wt;
                     val += fe;
                 }
@@ -110,4 +113,5 @@ public class Main {
 
     }
 }
+
 
