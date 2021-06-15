@@ -6,6 +6,10 @@
 # define MAX_WT static_cast<long long>(4000000)
 using namespace std;
 
+/*This program creates an updated mempool.csv which contains cumulative fee and weight of
+  each transaction including all of its parents.
+*/
+
 class Transactions{
     public:
         string tx_id;
