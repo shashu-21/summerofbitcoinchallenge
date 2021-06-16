@@ -6,8 +6,10 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 public class Main {
     static void inputTrans() throws FileNotFoundException { //function to take input from mempool.csv
@@ -45,7 +47,7 @@ public class Main {
         }
         inFileReader.close();
     }
-    static void printOutput(HashSet<Integer> trans) throws FileNotFoundException { // function to print the block in a txt file
+    static void printOutput(ArrayList<Integer> trans) throws FileNotFoundException { // function to print the block in a txt file
         File outFile = new File("src/block.txt");
         PrintWriter outWriter = new PrintWriter(outFile);
         for(int item : trans)
@@ -57,7 +59,7 @@ public class Main {
     }
     static int calcGreedy() throws FileNotFoundException { //function to determine the maximum fee generated and create the block
         int n = Resources.updatedList.size();
-        HashSet<Integer> trans = new HashSet<>();
+        ArrayList<Integer> trans = new ArrayList<>();
         int W = 1000000;
         int i = 0;
         int val = 0;
@@ -76,7 +78,7 @@ public class Main {
             }
             else
             {
-                HashSet<Integer> temp = new HashSet<>();
+                ArrayList<Integer> temp = new ArrayList<>();
                 if(!trans.contains(item.id))
                 {
                     int wt = item.weightTot;
@@ -114,7 +116,7 @@ public class Main {
         //taking input from original upmempool.csv
         inputCumTrans();
         Resources.sortInOrder();
-
+        
         //calculating
         System.out.println(calcGreedy());
     }
