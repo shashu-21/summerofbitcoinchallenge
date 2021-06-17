@@ -6,7 +6,7 @@ The repository contains a directory 'src' within which the java source code for 
 
 **Source Files**
 
-* main.cpp: This program takes mempool.csv file and input and creates another file upmempool.csv which contains the cumulative fee and weight of
+* main.cpp: This program takes mempool.csv file as input and creates another file upmempool.csv which contains the cumulative fee and weight of
   each transaction including all of its parents.
   
 * Main.java: This contains the driver code for block generation where different classes and functions are accessed to generate and output the block of permissible transactions.
