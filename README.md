@@ -11,7 +11,7 @@ The repository contains a directory 'src' within which the java source code for 
   
 * Main.java: This contains the driver code for block generation where different classes and functions are accessed to generate and output the block of permissible transactions.
 * Resources.java: This is the class that stores the dynamic arrays of objects of Transactions and CumulativeTrans class. It allows the use of these list in the main function and also includes a sorting function.
-* Transactions.java and CumulativeTrans.java: These contain classes objects of which are used to represent each entry in the input file.
+* Transactions.java and CumulativeTrans.java: These contain classes, objects of which are used to represent each entry in the input file.
 
 **Idea**
 
@@ -21,6 +21,7 @@ There were two points of interests when tackling this problem:
 * Greedy Approach: Since the DP approach was very costly in terms of computational time and memory, the approach I followed was to apply a greedy algorithm on the sorted list. The heuristic followed was to priortize those transactions with a higher fee/weight ratio. Using this approach the time complexity came out to be O(W) and space complexity of O(n). This Solution is not the best solution for the given set of transactions, but it is close to total fees that the transactions have.
 
 *Note*: All the weights of transactions are multiples of 4, so is the maximum capacity, hence this could be divided by 4 for better efficiency.
+
 **References**
 
 [Miner Fees](https://en.bitcoin.it/wiki/Miner_fees)
