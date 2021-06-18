@@ -4,7 +4,6 @@
  * */
 
 import java.util.ArrayList;
-import java.util.Set;
 
 public class Resources {
     /*
@@ -31,7 +30,7 @@ public class Resources {
                     t = updatedList.get(i).weightTot;
                     updatedList.get(i).weightTot = updatedList.get(j).weightTot;
                     updatedList.get(j).weightTot = t;
-                    Set<Integer> temp = updatedList.get(i).ancestors;
+                    ArrayList<Integer> temp = updatedList.get(i).ancestors;
                     updatedList.get(i).ancestors = updatedList.get(j).ancestors;
                     updatedList.get(j).ancestors = temp;
                     t =  updatedList.get(j).id;

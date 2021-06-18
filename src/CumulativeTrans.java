@@ -3,6 +3,7 @@
  * Date: 15/06/2021
  * */
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,7 +13,7 @@ public class CumulativeTrans {
     * */
     int id;
     int feeTot, weightTot;
-    Set<Integer> ancestors = new HashSet<Integer>();
+    ArrayList<Integer> ancestors = new ArrayList<>();
     public CumulativeTrans(int id,int feeTot, int weightTot)
     {
         this.id = id;

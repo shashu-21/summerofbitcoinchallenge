@@ -6,10 +6,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 
 public class Main {
     static void inputTrans() throws FileNotFoundException { //function to take input from mempool.csv
@@ -94,12 +91,14 @@ public class Main {
                             temp.add(ancestor);//adding all the ancestors not already present
                     }
                     if(W-wt>=0) {
+                        //Collections.reverse(temp);
                         trans.addAll(temp);//adding all the ancestors not present so far.
                         trans.add(item.id); // adding the element at last, such that order is maintained
                         W -= wt;
                         val += fe;
 
                     }
+                    temp.clear();
                 }
             }
         }
@@ -116,7 +115,8 @@ public class Main {
         //taking input from original upmempool.csv
         inputCumTrans();
         Resources.sortInOrder();
-        
+
+
         //calculating
         System.out.println(calcGreedy());
     }
